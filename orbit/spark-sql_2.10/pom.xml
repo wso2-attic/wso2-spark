@@ -110,7 +110,7 @@
     </build>
 
     <properties>
-        <exp.pkg.version.spark>1.4.2.wso2v1-SNAPSHOT</exp.pkg.version.spark>
+        <exp.pkg.version.spark>1.4.2.wso2v1</exp.pkg.version.spark>
         <spark.version>1.4.2-wso2v1-SNAPSHOT</spark.version>
         <spark.import.version>[1.4.2, 1.5.0)</spark.import.version>
         <scala.version>2.10.4</scala.version>
