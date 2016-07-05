@@ -73,6 +73,7 @@ private[master] class Master(
   val idToApp = new HashMap[String, ApplicationInfo]
   val waitingApps = new ArrayBuffer[ApplicationInfo]
   val apps = new HashSet[ApplicationInfo]
+  private val waitingAppsWhileRecovering = new ArrayBuffer[ApplicationInfo]
 
   private val idToWorker = new HashMap[String, WorkerInfo]
   private val addressToWorker = new HashMap[Address, WorkerInfo]
@@ -527,6 +528,9 @@ private[master] class Master(
     }
 
     state = RecoveryState.ALIVE
+    // Re-register the apps which were omitted during the Recovering phase.
+    waitingAppsWhileRecovering.foreach(registerApplication)
+    waitingAppsWhileRecovering.clear()
     schedule()
     logInfo("Recovery complete - resuming operations!")
   }
@@ -583,15 +587,28 @@ private[master] class Master(
    * every time a new app joins or resource availability changes.
    */
   private def schedule(): Unit = {
-    if (state != RecoveryState.ALIVE) { return }
+    if (state != RecoveryState.ALIVE) {
+      return
+    }
     // Drivers take strict precedence over executors
-    val shuffledWorkers = Random.shuffle(workers) // Randomization helps balance drivers
-    for (worker <- shuffledWorkers if worker.state == WorkerState.ALIVE) {
-      for (driver <- waitingDrivers) {
+    val shuffledAliveWorkers = Random.shuffle(workers.toSeq.filter(_.state == WorkerState.ALIVE))
+    val numWorkersAlive = shuffledAliveWorkers.size
+    var curPos = 0
+    for (driver <- waitingDrivers.toList) { // iterate over a copy of waitingDrivers
+      // We assign workers to each waiting driver in a round-robin fashion. For each driver, we
+      // start from the last worker that was assigned a driver, and continue onwards until we have
+      // explored all alive workers.
+      var launched = false
+      var numWorkersVisited = 0
+      while (numWorkersVisited < numWorkersAlive && !launched) {
+        val worker = shuffledAliveWorkers(curPos)
+        numWorkersVisited += 1
         if (worker.memoryFree >= driver.desc.mem && worker.coresFree >= driver.desc.cores) {
           launchDriver(worker, driver)
           waitingDrivers -= driver
+          launched = true
         }
+        curPos = (curPos + 1) % numWorkersAlive
       }
     }
     startExecutorsOnWorkers()
@@ -673,7 +690,13 @@ private[master] class Master(
   private def registerApplication(app: ApplicationInfo): Unit = {
     val appAddress = app.driver.path.address
     if (addressToApp.contains(appAddress)) {
-      logInfo("Attempted to re-register application at same address: " + appAddress)
+      if (state == RecoveryState.RECOVERING) {
+        logInfo("Attempted to re-register application at same address: " + appAddress + " in the " +
+          "Recovering Mode")
+        waitingAppsWhileRecovering += app
+      } else {
+        logInfo("Attempted to re-register application at same address: " + appAddress)
+      }
       return
     }
 

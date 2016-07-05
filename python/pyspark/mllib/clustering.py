@@ -165,9 +165,9 @@ class GaussianMixtureModel(object):
     >>> model = GaussianMixture.train(clusterdata_2, 2, convergenceTol=0.0001,
     ...                               maxIterations=150, seed=10)
     >>> labels = model.predict(clusterdata_2).collect()
-    >>> labels[0]==labels[1]==labels[2]
+    >>> labels[0]==labels[1]
     True
-    >>> labels[3]==labels[4]
+    >>> labels[2]==labels[3]==labels[4]
     True
     >>> clusterdata_3 = sc.parallelize(data.reshape(15, 1))
     >>> im = GaussianMixtureModel([0.5, 0.5],
@@ -255,7 +255,7 @@ class GaussianMixture(object):
             if initialModel.k != k:
                 raise Exception("Mismatched cluster count, initialModel.k = %s, however k = %s"
                                 % (initialModel.k, k))
-            initialModelWeights = initialModel.weights
+            initialModelWeights = list(initialModel.weights)
             initialModelMu = [initialModel.gaussians[i].mu for i in range(initialModel.k)]
             initialModelSigma = [initialModel.gaussians[i].sigma for i in range(initialModel.k)]
         weight, mu, sigma = callMLlibFunc("trainGaussianMixture", rdd.map(_convert_to_vector), k,

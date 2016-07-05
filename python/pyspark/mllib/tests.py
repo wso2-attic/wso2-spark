@@ -137,15 +137,17 @@ class VectorTests(MLlibTestCase):
         self.assertTrue(dv.array.dtype == 'float64')
 
     def test_sparse_vector_indexing(self):
-        sv = SparseVector(4, {1: 1, 3: 2})
-        self.assertEquals(sv[0], 0.)
-        self.assertEquals(sv[3], 2.)
-        self.assertEquals(sv[1], 1.)
-        self.assertEquals(sv[2], 0.)
-        self.assertEquals(sv[-1], 2)
-        self.assertEquals(sv[-2], 0)
-        self.assertEquals(sv[-4], 0)
-        for ind in [4, -5]:
+        sv = SparseVector(5, {1: 1, 3: 2})
+        self.assertEqual(sv[0], 0.)
+        self.assertEqual(sv[3], 2.)
+        self.assertEqual(sv[1], 1.)
+        self.assertEqual(sv[2], 0.)
+        self.assertEqual(sv[4], 0.)
+        self.assertEqual(sv[-1], 0.)
+        self.assertEqual(sv[-2], 2.)
+        self.assertEqual(sv[-3], 0.)
+        self.assertEqual(sv[-5], 0.)
+        for ind in [5, -6]:
             self.assertRaises(ValueError, sv.__getitem__, ind)
         for ind in [7.8, '1']:
             self.assertRaises(TypeError, sv.__getitem__, ind)
@@ -307,6 +309,18 @@ class ListTests(MLlibTestCase):
                                           maxIterations=10, seed=63)
         for c1, c2 in zip(clusters1.weights, clusters2.weights):
             self.assertEquals(round(c1, 7), round(c2, 7))
+
+    def test_gmm_with_initial_model(self):
+        from pyspark.mllib.clustering import GaussianMixture
+        data = self.sc.parallelize([
+            (-10, -5), (-9, -4), (10, 5), (9, 4)
+        ])
+
+        gmm1 = GaussianMixture.train(data, 2, convergenceTol=0.001,
+                                     maxIterations=10, seed=63)
+        gmm2 = GaussianMixture.train(data, 2, convergenceTol=0.001,
+                                     maxIterations=10, seed=63, initialModel=gmm1)
+        self.assertAlmostEqual((gmm1.weights - gmm2.weights).sum(), 0.0)
 
     def test_classification(self):
         from pyspark.mllib.classification import LogisticRegressionWithSGD, SVMWithSGD, NaiveBayes

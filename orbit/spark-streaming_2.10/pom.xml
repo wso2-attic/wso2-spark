@@ -23,13 +23,13 @@
     <parent>
         <groupId>org.wso2.orbit.org.apache.spark</groupId>
         <artifactId>spark-orbit</artifactId>
-        <version>1.4.2.wso2v1-SNAPSHOT</version>
+        <version>1.4.3.wso2v1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spark-streaming_2.10</artifactId>
-    <version>1.4.2.wso2v1-SNAPSHOT</version>
+    <version>1.4.3.wso2v1-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <name>WSO2 Carbon Orbit - Apache Spark Streaming</name>
     <description>This bundle will export packages from Apache Spark Streaming v 1.4.2-wso2v1</description>
@@ -86,12 +86,22 @@
                         <Private-Package>
                         </Private-Package>
                         <Import-Package>
-                            org.apache.spark.*;version="${spark.import.version}",
-                            scala.*;version="${scala.import.version}",
-                            org.apache.hadoop.*;version="${hadoop.import.version}",
-                            akka.*;version="${akka.import.version}",
-                            org.slf4j.*;version="${slf4j.import.version}"
+                            akka.actor.*;version="[2.3.0, 2.4.0),
+                            com.codahale.metrics.*;version="[3.1.0,3.2.0),
+                            org.apache.commons.lang3.*;version="[3.3.0,3.4.0),
+                            org.apache.hadoop.*;version="[2.7.0,2.8.0),
+                            org.apache.spark.*;version="[1.4.0,1.5.0),
+                            org.slf4j.*;version="[1.7.0,1.8.0),
+                            scala.*;version="[2.10.0,2.11.0),
+                            com.google.common.base.*;version="[19.0.0,20.0.0), optional
+                            javax.servlet.http.*;version="[3.0.0,4.0.0);resolution:=optional,
+                            org.spark-project.guava.base.*;version="[0.0.0,1.0.0);resolution:=optional,
+                            org.spark-project.guava.util.concurrent.*;version="[0.0.0,1.0.0);resolution:=optional,
+                            org.spark-project.jetty.servlet.*;version="[0.0.0,1.0.0);resolution:=optional,
+                            py4j.*;version="[0.0.0,1.0.0);resolution:=optional
                         </Import-Package>
+                        <!--Dynamic imports enabled here because spark sql uses scala reflection-->
+                        <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
             </plugin>
@@ -99,8 +109,8 @@
     </build>
 
     <properties>
-        <exp.pkg.version.spark>1.4.2.wso2v1</exp.pkg.version.spark>
-        <spark.version>1.4.2-wso2v1-SNAPSHOT</spark.version>
+        <exp.pkg.version.spark>1.4.3.wso2v1</exp.pkg.version.spark>
+        <spark.version>1.4.3.wso2v1-SNAPSHOT</spark.version>
         <spark.import.version>[1.4.2, 1.5.0)</spark.import.version>
         <scala.import.version>[2.10.4, 2.11.0)</scala.import.version>
         <hadoop.import.version>[2.2.0, 2.3.0)</hadoop.import.version>

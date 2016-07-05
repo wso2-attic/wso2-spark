@@ -23,13 +23,13 @@
     <parent>
         <groupId>org.wso2.orbit.org.apache.spark</groupId>
         <artifactId>spark-orbit</artifactId>
-        <version>1.4.2.wso2v1-SNAPSHOT</version>
+        <version>1.4.3.wso2v1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spark-core_2.10</artifactId>
-    <version>1.4.2.wso2v1-SNAPSHOT</version>
+    <version>1.4.3.wso2v1-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <name>WSO2 Carbon Orbit - Apache Spark Core</name>
     <description>
@@ -38,36 +38,9 @@
     <url>http://wso2.org</url>
 
     <properties>
-        <exp.pkg.version.spark>1.4.2.wso2v1</exp.pkg.version.spark>
-        <spark.version>1.4.2-wso2v1-SNAPSHOT</spark.version>
+        <exp.pkg.version.spark>1.4.3.wso2v1</exp.pkg.version.spark>
+        <spark.version>1.4.3.wso2v1-SNAPSHOT</spark.version>
         <spark.import.version>[1.4.2, 1.5.0)</spark.import.version>
-
-        <hadoop.client.import.version>[2.2.0, 2.7.0)</hadoop.client.import.version>
-        <typesafe.version>1.2.0</typesafe.version>
-        <typesafe.import.version>[1.2.0, 1.4.0)</typesafe.import.version>
-        <akka.version>2.3.4-spark</akka.version>
-        <akka.import.version>[2.3.4, 2.4.0)</akka.import.version>
-        <codahale.metrics.import.version>[3.1.0, 4.0.0)</codahale.metrics.import.version>
-        <jackson.import.version>[2.4.4, 2.5.0)</jackson.import.version>
-        <json4s.import.version>[3.2.10, 3.2.11)</json4s.import.version>
-        <kryo.import.version>[2.21,3.0)</kryo.import.version>
-        <snappy.import.version>[1.1.1.7, 1.1.2.0)</snappy.import.version>
-        <netty-all.import.version>[4.0.23, 4.0.24.Final)</netty-all.import.version>
-        <scala.import.version>[2.10.4, 2.11.0)</scala.import.version>
-        <commons-math3.import.version>[3.4.1, 3.5.0)</commons-math3.import.version>
-        <commons-lang3.import.version>[3.3.2, 3.3.3)</commons-lang3.import.version>
-        <compress.lzf.import.version>[1.0.3, 1.1.0)</compress.lzf.import.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <guava.import.version>[15.0.0,16.0.0)</guava.import.version>
-        <slf4j.import.version>[1.7.0, 1.8.0)</slf4j.import.version>
-        <servlet-api.import.version>[2.5, 3.0)</servlet-api.import.version>
-        <chill.import.version>[0.5.0, 0.6.0)</chill.import.version>
-        <stream.import.version>[2.2.0, 2.3.0)</stream.import.version>
-
-        <!--jersey bundles havent specified an export version-->
-        <jersey.import.version>0.0.0</jersey.import.version>
-
-        <jetty.version>8.1.14.v20131031</jetty.version>
     </properties>
 
     <repositories>
@@ -158,35 +131,61 @@
                         </Private-Package>
                         <Import-Package>
                             !scala.tools.*,
-                            scala.*;version="${scala.import.version}",
-                            com.clearspring.analytics.*;version="${stream.import.version}",
-                            com.codahale.metrics.*;version="${codahale.metrics.import.version}",
-                            com.esotericsoftware.*; version = "${kryo.import.version}",
-                            com.fasterxml.jackson.*;version="${jackson.import.version}",
-                            com.google.common.base.*;version="${guava.import.version}",
-                            com.ning.compress.*;version="${compress.lzf.import.version}",
-                            com.twitter.chill.*;version="${chill.import.version}",
-                            io.netty.*;version="${netty-all.import.version}",
-                            javax.servlet.*;version ="${servlet-api.import.version}",
-                            org.apache.commons.lang3.*;version="${commons-lang3.import.version}",
-                            org.apache.commons.math3.*;version="${commons-math3.import.version}",
-                            org.apache.hadoop.*;version="${hadoop.client.import.version}",
-                            org.json4s.*;version = "${json4s.import.version}",
-                            org.slf4j.*;version="${slf4j.import.version}",
-                            org.xerial.snappy.*;version="${snappy.import.version}",
-                            com.sun.jersey.*;version="${jersey.import.version}",
-                            akka.*; version="${akka.import.version}",
-                            com.typesafe.config.*;version=$"{typesafe.import.version}",
-                            javax.tools;resolution:=optional,
-                            org.spark-project.jetty.jmx;resolution:=optional,
-                            org.spark-project.jetty.jndi;resolution:=optional,
-                            org.spark-project.jetty.jndi.local;resolution:=optional,
-                            org.spark-project.jetty.webapp;resolution:=optional,
-                            org.spark-project.jetty.xml;resolution:=optional,
-                            sun.misc;resolution:=optional,
-                            sun.nio.ch;resolution:=optional,
-                            sun.reflect;resolution:=optional,
-                            sun.security.action;resolution:=optional
+                            akka.*;version="[2.3.0,2.4.0)",
+                            com.clearspring.analytics.stream.cardinality.*;version="[2.2.0,2.3.0)",
+                            com.codahale.metrics.*;version="[3.1.0,3.2.0)",
+                            com.esotericsoftware.*;version="[2.24.0,2.25.0)",
+                            com.fasterxml.jackson.annotation.*;version="[2.4.0,2.5.0)",
+                            com.fasterxml.jackson.core.*;version="[2.4.0,2.5.0)",
+                            com.fasterxml.jackson.databind.*;version="[2.4.0,2.5.0)",
+                            com.fasterxml.jackson.module.scala.*;version="[2.4.0,2.5.0)",
+                            com.ning.compress.lzf.*;version="[1.0.0,1.1.0)",
+                            com.sun.jersey.spi.container.*;version="[0.0.0, 1.0.0)",
+                            com.twitter.chill.*;version="[0.5.0,0.6.0)",
+                            com.typesafe.config.*;version="[1.2.0,1.3.0)",
+                            io.netty.*;version="[4.0.0,4.1.0)",
+                            javax.annotation.concurrent.*;version="[0.0.0, 1.0.0)",
+                            javax.imageio.*;version="[0.0.0, 1.0.0)",
+                            javax.management.*;version="[0.0.0, 1.0.0)",
+                            javax.naming.*;version="[0.0.0, 1.0.0)",
+                            javax.net.ssl.*;version="[0.0.0, 1.0.0)",
+                            javax.security.*;version="[0.0.0, 1.0.0)",
+                            javax.servlet.*;version="[2.6.0,2.7.0)",
+                            javax.sql.*;version="[0.0.0, 1.0.0)",
+                            javax.transaction.*;version="[0.0.0, 1.0.0)",
+                            javax.ws.rs.*;version="[0.0.0, 1.0.0)",
+                            javax.xml.parsers.*;version="[0.0.0, 1.0.0)",
+                            org.apache.commons.lang3.*;version="[3.3.0,3.4.0)",
+                            org.apache.hadoop.*;version="[2.7.0,2.8.0)",
+                            org.apache.log4j.*;version="[1.2.0,1.3.0)",
+                            org.apache.spark.sql.types.*;version="[1.4.0,1.5.0)",
+                            org.ietf.jgss.*;version="[0.0.0, 1.0.0)",
+                            org.json4s.*;version="[3.2.0,3.3.0)",
+                            org.apache.zookeeper.*;version="[3.4.0,3.5.0)",
+                            org.roaringbitmap.*;version="[0.4.0,0.5.0)",
+                            org.slf4j.*;version="[1.7.0,1.8.0)",
+                            org.xerial.snappy.*;version="[1.1.0,1.2.0)",
+                            scala.*;version="[2.10.0,2.11.0)",
+                            com.google.common.*;version="[19.0.0,20.0.0)";resolution:=optional,
+                            javax.annotation.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            javax.inject.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            javax.servlet.*;version="[3.0.0,4.0.0)";resolution:=optional,
+                            javax.tools.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            net.jpountz.lz4.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            net.razorvine.pickle.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            org.apache.commons.math3.distribution.*;version="[3.4.0,4.0.0)";resolution:=optional,
+                            org.apache.curator.*;version="[2.4.0,3.0.0)";resolution:=optional,
+                            org.apache.ivy.*;version="[2.0.0,3.0.0)";resolution:=optional,
+                            org.apache.mesos.*;version="[0.18.0,0.19.0)";resolution:=optional,
+                            org.apache.mesos.protobuf.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            org.mortbay.*;version="[6.1.0,7.0.0)";resolution:=optional,
+                            org.spark-project.jetty.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            py4j.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            sun.misc.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            sun.nio.ch.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            sun.reflect.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            sun.security.action.*;version="[0.0.0, 1.0.0)";resolution:=optional,
+                            tachyon.*;version="[0.0.0, 1.0.0)";resolution:=optional
                         </Import-Package>
                         <Include-Resource>
                             {maven-resources}
