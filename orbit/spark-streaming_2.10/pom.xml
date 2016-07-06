@@ -86,19 +86,16 @@
                         <Private-Package>
                         </Private-Package>
                         <Import-Package>
-                            akka.actor.*;version="[2.3.0, 2.4.0),
-                            com.codahale.metrics.*;version="[3.1.0,3.2.0),
-                            org.apache.commons.lang3.*;version="[3.3.0,3.4.0),
-                            org.apache.hadoop.*;version="[2.7.0,2.8.0),
-                            org.apache.spark.*;version="[1.4.0,1.5.0),
-                            org.slf4j.*;version="[1.7.0,1.8.0),
-                            scala.*;version="[2.10.0,2.11.0),
-                            com.google.common.base.*;version="[19.0.0,20.0.0), optional
-                            javax.servlet.http.*;version="[3.0.0,4.0.0);resolution:=optional,
-                            org.spark-project.guava.base.*;version="[0.0.0,1.0.0);resolution:=optional,
-                            org.spark-project.guava.util.concurrent.*;version="[0.0.0,1.0.0);resolution:=optional,
-                            org.spark-project.jetty.servlet.*;version="[0.0.0,1.0.0);resolution:=optional,
-                            py4j.*;version="[0.0.0,1.0.0);resolution:=optional
+                            akka.actor.*;version="${akka.actor.import.range}",
+                            com.codahale.metrics.*;version="${com.codahale.metrics.import.range}",
+                            org.apache.commons.lang3.*;version="${org.apache.commons.lang3.import.range}",
+                            org.apache.hadoop.*;version="${org.apache.hadoop.import.range}",
+                            org.apache.spark.*;version="${org.apache.spark.import.range}",
+                            org.slf4j.*;version="${org.slf4j.import.range}",
+                            scala.*;version="${scala.import.range}",
+                            com.google.common.base.*;version="${com.google.common.base.import.range}";resolution:=optional,
+                            javax.servlet.http.*;version="${javax.servlet.http.import.range}";resolution:=optional,
+                            py4j.*;version="${py4j.import.range}";resolution:=optional
                         </Import-Package>
                         <!--Dynamic imports enabled here because spark sql uses scala reflection-->
                         <DynamicImport-Package>*</DynamicImport-Package>

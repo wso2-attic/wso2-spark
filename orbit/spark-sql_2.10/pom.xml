@@ -96,24 +96,23 @@
                         </Private-Package>
                         <Import-Package>
                             !org.apache.spark.sql.*,
-                            com.clearspring.analytics.stream.cardinality.*;version="[2.2.0 ,2.3.0),
-                            com.esotericsoftware.kryo.*;version="[2.24.0 ,2.25.0),
-                            com.fasterxml.jackson.core.*;version="[2.4.0 ,2.5.0),
-                            com.fasterxml.jackson.databind.*;version="[2.4.0 ,2.5.0),
-                            com.twitter.chill.*;version="[0.5.0 ,0.6.0),
-                            javax.annotation.*;version="[0.0.0 ,0.1.0),
-                            org.apache.commons.lang3.*;version="[3.3.0 ,3.4.0),
-                            org.apache.hadoop.*;version="[2.6.0 ,2.7.0),
-                            org.apache.spark.*;version="[1.4.0 ,1.5.0),
-                            org.json4s.*;version="[3.2.0 ,3.3.0),
-                            org.slf4j.*;version="[1.7.0 ,1.8.0),
-                            scala.*;version="[2.10.0 ,2.11.0),
-                            jodd.datetime.*;version="[3.6.0,4.0.0);resolution:=optional,
-                            net.razorvine.pickle.*;version="[0.0.0,1.0.0);resolution:=optional,
-                            org.spark-project.guava.*;version="[0.0.0,1.0.0);resolution:=optional,
-                            parquet.*;version="[0.0.0,1.0.0);resolution:=optional,
-                            scala.quasiquotes.*;version="[0.0.0,1.0.0);resolution:=optional,
-                            scala.tools.*;version="[2.10.0,3.0.0);resolution:=optional
+                            com.clearspring.analytics.stream.cardinality.*;version="${com.clearspring.analytics.stream.cardinality.import.range}",
+                            com.esotericsoftware.kryo.*;version="${com.esotericsoftware.kryo.import.range}",
+                            com.fasterxml.jackson.core.*;version="${com.fasterxml.jackson.core.import.range}",
+                            com.fasterxml.jackson.databind.*;version="${com.fasterxml.jackson.databind.import.range}",
+                            com.twitter.chill.*;version="${com.twitter.chill.import.range}",
+                            javax.annotation.*;version="${javax.annotation.import.range}",
+                            org.apache.commons.lang3.*;version="${org.apache.commons.lang3.import.range}",
+                            org.apache.hadoop.*;version="${org.apache.hadoop.import.range}",
+                            org.apache.spark.*;version="${org.apache.spark.import.range}",
+                            org.json4s.*;version="${org.json4s.import.range}",
+                            org.slf4j.*;version="${org.slf4j.import.range}",
+                            scala.*;version="${scala.import.range}",
+                            jodd.datetime.*;version="${jodd.datetime.import.range}";resolution:=optional,
+                            net.razorvine.pickle.*;version="${net.razorvine.pickle.import.range}";resolution:=optional,
+                            parquet.*;version="${parquet.import.range}";resolution:=optional,
+                            scala.quasiquotes.*;version="${scala.quasiquotes.import.range}";resolution:=optional,
+                            scala.tools.*;version="${scala.tools.import.range}";resolution:=optional
                         </Import-Package>
                         <Include-Resource>
                             {maven-resources}
