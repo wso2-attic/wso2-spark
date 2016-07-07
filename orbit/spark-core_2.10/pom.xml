@@ -17,19 +17,17 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.orbit.org.apache.spark</groupId>
         <artifactId>spark-orbit</artifactId>
-        <version>1.4.3.wso2v1-SNAPSHOT</version>
+        <version>1.4.3.wso2v1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spark-core_2.10</artifactId>
-    <version>1.4.3.wso2v1-SNAPSHOT</version>
+    <version>1.4.3.wso2v1</version>
     <packaging>bundle</packaging>
     <name>WSO2 Carbon Orbit - Apache Spark Core</name>
     <description>
@@ -39,7 +37,7 @@
 
     <properties>
         <exp.pkg.version.spark>1.4.3.wso2v1</exp.pkg.version.spark>
-        <spark.version>1.4.3.wso2v1-SNAPSHOT</spark.version>
+        <spark.version>1.4.3.wso2v1</spark.version>
         <spark.import.version>[1.4.2, 1.5.0)</spark.import.version>
     </properties>
 
