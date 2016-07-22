@@ -37,7 +37,6 @@
         <module>spark-core_2.10</module>
         <module>spark-sql_2.10</module>
         <module>spark-streaming_2.10</module>
-        <module>spark-yarn_2.10</module>
     </modules>
 
     <properties>
