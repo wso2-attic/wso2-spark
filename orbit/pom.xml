@@ -20,7 +20,7 @@
     <parent>
         <groupId>org.apache.spark</groupId>
         <artifactId>spark-parent_2.10</artifactId>
-        <version>1.4.3.wso2v2-SNAPSHOT</version>
+        <version>1.4.3.wso2v3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -31,7 +31,7 @@
     <name>Spark-Orbit</name>
     <description>org.apache.spark</description>
     <url>http://www.wso2.com</url>
-    <version>1.4.3.wso2v2-SNAPSHOT</version>
+    <version>1.4.3.wso2v3-SNAPSHOT</version>
 
     <modules>
         <module>spark-core_2.10</module>
